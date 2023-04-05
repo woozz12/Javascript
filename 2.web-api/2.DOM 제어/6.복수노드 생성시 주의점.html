@@ -17,12 +17,11 @@
     </ul>
 
     <script>
-
         //Live DOM: 사전에 미리 렌더링되어 있는 요소 노드.
         const $fruits = document.getElementById('fruits');
 
         //과일 이름 텍스트 배열
-        const fruitsName = ['Apple', 'Banana','Grape','Orange'];
+        const fruitsName = ['Apple', 'Banana', 'Grape', 'Orange'];
 
         /*
         # 아래 방법의 문제점
@@ -44,16 +43,13 @@
         //가상 컨테이너 생성
         const $frag = document.createDocumentFragment();
 
-        for(let f of fruitsName) {
+        for (let f of fruitsName) {
             const $li = document.createElement('li');
             $li.textContent = f;
             $frag.appendChild($li);
         }
 
         $fruits.appendChild($frag);
-
-
-
     </script>
 
 </body>

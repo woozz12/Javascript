@@ -38,7 +38,6 @@
         //firstchild는 텍스트 노드가 나올 가능성 있음.
         const $firstChild = $fruits.firstChild;
         console.log('first-child:'+ $firstChild);
-
         console.log('$first-element-child' + $fruits.firstElementChild);
         console.log('$first-element-child' + $fruits.lastElementChild);
 
@@ -46,7 +45,7 @@
         //텍스트 노드가 있을 시 true가 나올 수 있음.
         const $test = document.getElementById('test');
         console.log($test.hasChildNodes());
-
+        
         //텍스트 노드를 제외한 요소노드의 존재 여부 확인
         console.log(!!$test.children.length);
 

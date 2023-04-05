@@ -16,22 +16,18 @@
         <p>
             <!-- afterbegin -->
             foo
-            <!-- beforeend -->
-
         </p>
+            <!-- beforeend -->
     </div>
     <!-- afterend -->
 
     <script>
-
         const $div = document.querySelector('div');
 
         $div.insertAdjacentHTML('beforebegin', '<p><span>안녕하세요~!</span></p>');
         $div.insertAdjacentHTML('afterbegin', '<p><span>안녕하세요~!</span></p>');
         $div.insertAdjacentHTML('beforeend', '<p><span>안녕하세요~!</span></p>');
         $div.insertAdjacentHTML('afterend', '<p><span>안녕하세요~!</span></p>');
-
-
     </script>
 
 </body>
