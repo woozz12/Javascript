@@ -152,11 +152,15 @@
         //이벤트 핸들러 함수
         function activate(e) {
 
+
+            
             //이벤트 발생 타겟이 특정 요소인지를 검증.
             if (!e.target.matches('#fruits > li')) {
                 // console.log('여기는 이벤트가 발생하면 안돼!');
                 return;
             }
+
+
 
             //active 클래스를 클릭된 요소에 추가하고
             //기존에 active를 가지고 있던 요소에 클래스를 삭제.
@@ -174,6 +178,8 @@
 
             }
 
+
+
             // e.target.classList.add('active');
 
             //메세지 영역에 이벤트가 발생된 과일 이름을 추가
@@ -181,12 +187,18 @@
             $msg.textContent = e.target.id;
         }
 
+
+
         //ul에 이벤트 등록
         $fruits.addEventListener('click', activate);
+
+
 
         //동적으로 과일을 추가하자
         const $btn = document.getElementById('add');
         const $textBox = document.querySelector('.text-box');
+
+        
 
         //추가 버튼에 이벤트 등록
         $btn.addEventListener('click', e => {
@@ -196,9 +208,14 @@
             $fruits.appendChild($newLi);
             $textBox.value = '';
 
+
+
             //새롭게 추가된 li에도 active 추가 대상 여부를 확인하기 위해 배열에 추가.
             $liList.push($newLi);
         });
+
+
+
 
         //입력창 안에서 엔터 키를 입력하면 버튼 클릭과 동일한 효과 내기
         $textBox.addEventListener('keydown', e => {
