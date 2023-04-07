@@ -8,18 +8,10 @@
     <title>Document</title>
 
     <style>
-        body{
-            background: black;
-        }
-        h2 {
-            color: white;
-        }
-       .inner {
-        color: white;
-       }
         .center {
             text-align: center;
         }
+
         .content {
             border: 1px solid #777;
         }
@@ -59,14 +51,15 @@
             width: 100%;
             height: 250px;
             box-sizing: border-box;
+
+            /* 사용자가 마음대로 사이즈 조정 막는 기능 resize */
             resize: none;
         }
-
     </style>
 
 </head>
 
-<body class="dark">
+<body>
 
     <header>
         <div class="center">
@@ -84,7 +77,8 @@
             </div>
             <div class="right">
                 <div class="inner">
-                    <p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다. 또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다.</p>
+                    <p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고
+                        있다. 또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다.</p>
                     <a href="http://www.naver.com">네이버로 이동</a>
                 </div>
             </div>
@@ -100,24 +94,33 @@
         클래스 이름을 dark, light 등으로 추가해서 구분을 했습니다.
         참고로 글씨 색깔을 바꿔줘야 하는 태그는 p, h2, a 입니다.
         */
-        const $dark = document.querySelector('body[class="dark"]')
-        console.log();
-        const $btn1 = document.getElementById('btn1')
-        // console.log($btn1);
-        $btn1.onclick = function() {
+        // const $dark = document.querySelector('body[class="dark"]')
+        // console.log();
+        // const $btn1 = document.getElementById('btn1')
+        // // console.log($btn1);
+        // $btn1.onclick = function() {
 
+        // }
+
+        const $btn1 = document.getElementById('btn1');
+        const $tags = document.querySelectorAll('p,h2,a');
+
+        $btn1.onclick = function () {
+            $btn1.classList.toggle('dark');
+
+            if ($btn1.classList.contains('dark')) {
+                //어둡게 보기 모드
+                document.body.style.background = "black";
+                [...$tags].forEach($ele => $ele.style.color = 'white');
+                $btn1.textContent = '밝게 보기';
+
+            } else {
+                //밝게 보기 모드
+                document.body.style.background = 'white';
+                [...$tags].forEach($ele => $ele.style.color = 'black');
+                $btn1.textContent = '어둡게 보기';
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
 
         /*
         클래스 이름을 통해서 이름 보기 모드인지를 확인.
@@ -127,6 +130,25 @@
         홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript
         */
 
+        const $btn2 = document.getElementById('btn2');
+        const $content = document.querySelector('.right .inner > p');
+        const $a = document.querySelector('.right .inner > a');
+
+        $btn2.onclick = function () {
+            if ($btn2.className === 'name') {
+                $content.innerHTML = '홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript';
+                $a.style.display = 'none';
+                $btn2.textContent = '내용보기';
+                $btn2.className = 'conView';
+            } else {
+                $content.innerHTML =
+                    '자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다. 또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다.';
+                $a.style.display = 'block';
+                $btn2.textContent = '이름 보기';
+                $btn2.className = 'name';
+
+            }
+        }
         /*
         메모장 보기 모드는 textarea를 생성해서 추가.
         클래스 이름 memo 속성을 추가해 주세요.
@@ -134,6 +156,49 @@
         .left 안에 있는 .inner의 모든 자식 노드를 제거하고
         생성하신 요소를 추가해 주시면 되겠습니다.
         */
+
+        // const $btn3 = document.getElementById('btn3 > name'); (X)
+        // 이렇게 쓸거면 querySelectorAll을 사용하는게 좋다
+        const $btn3 = document.getElementById('btn3');
+        
+        // addEventListener을 사용해도 상관 없다.
+        $btn3.onclick = function() {
+            const $inner = document.querySelector('.left > .inner');
+            
+            for(let $ele of [...$inner.children]){
+                $inner.removeChild($ele);
+            }
+            $btn3.classList.toggle('write');
+
+            if($btn3.className === 'write') {
+                const $textarea = document.createElement('textarea');
+                $textarea.className = 'memo';
+                const $regBtn = document.createElement('button');
+                $regBtn.textContent = '등록하기';
+
+                //복수요소를 추가 할 때는 가상 컨테이너를 만들어서 진행하는게 더 좋다 createDocumentFragment
+                const $frag = document.createDocumentFragment();
+                $frag.appendChild($textarea);
+                $frag.appendChild($regBtn);
+                $inner.appendChild($frag);
+
+                $btn3.textContent = '사진 모드';
+            } else {
+                const $img = document.createElement('img');
+                $img.setAttribute('src', './img/1.img');
+                $inner.appendChild($img);
+
+                $btn3.textContent = '메모장 모드';
+            }
+
+            //이 식으로 사용할건면 조건문으로 사용해야 합니다.
+            // $inner.removeChild($inner.firstElementChild);
+        }
+        
+
+
+
+
 
 
 
